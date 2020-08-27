@@ -14,13 +14,13 @@ namespace S2_Eksamen_GUI
         public ViewModel()
         {
             NorthwindContext context = new NorthwindContext();
-            RepositoryBase<Order> repository = new RepositoryBase<Order>(context);
+            OrderRepository repository = new OrderRepository(context);
             IEnumerable<Order> orders = repository.GetAll();
             Orders = new ObservableCollection<Order>(orders);
 
         }
         public ObservableCollection<Order> Orders { get; set; }
         public Order SelectedOrder { get; set; }
-        public List<OrderDetails> SelectedOrderDetails { get; set; }
+        public ICollection<OrderDetails> SelectedOrderDetails { get; set; }
     }
 }

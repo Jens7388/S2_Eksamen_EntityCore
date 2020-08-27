@@ -42,7 +42,7 @@ namespace S2_Eksamen_DataAccess
             context.SaveChanges();
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return context.Set<T>();
         }
@@ -69,12 +69,10 @@ namespace S2_Eksamen_DataAccess
         {
 
         }
-        public override Order GetBy(int id)
+        public override IEnumerable<Order> GetAll()
         {
-            var a = context.Orders.Where(o => o.OrderId == id).Include("OrderDetails").FirstOrDefault();
-            var b = context.Orders.AsQueryable().Include("OrderDetails")
-                .FirstOrDefault(o => o.OrderId == id);
-            return b;
+            IEnumerable<Order> orders = context.Orders.Include("OrderDetails");
+            return orders;
         }
     }
 }

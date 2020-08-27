@@ -53,7 +53,7 @@ namespace S2_Eksamen_GUI
         }
 
         private async void OrderSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {/*
+        {
             await GetComboBoxItems();
             comboBoxOrderID.SelectedItem = null;
             textBoxProductID.Text = null;
@@ -69,7 +69,7 @@ namespace S2_Eksamen_GUI
                 textBoxUnitPrice.Text += $"{orderDetails.UnitPrice}\n";
                 textBoxQuantity.Text += $"{orderDetails.Quantity}\n";
                 textBoxDiscount.Text += $"{orderDetails.Discount}\n";
-            }*/
+            }
         }
 
         
@@ -108,14 +108,14 @@ namespace S2_Eksamen_GUI
         }
 
         private async Task GetComboBoxItems()
-        {/*
+        {
             for(int i = 0; i < viewModel.Orders.Count; i++)
             {
-                comboBoxOrderID.Items.Add(await Task.Run(() => viewModel.Orders[i].OrderID));
+                comboBoxOrderID.Items.Add(await Task.Run(() => viewModel.Orders[i].OrderId));
             }
             for(int i = 0; i < viewModel.Orders.Count; i++)
             {
-                comboBoxCustomerID.Items.Add(await Task.Run(() => viewModel.Orders[i].CustomerID));
+                comboBoxCustomerID.Items.Add(await Task.Run(() => viewModel.Orders[i].CustomerId));
             }
             for(int i = 0; i < 10; i++)
             {
@@ -128,7 +128,7 @@ namespace S2_Eksamen_GUI
             for(int i = 0; i < 4; i++)
             {
                 comboBoxShipVia.Items.Add(i);
-            }*/
+            }
         }
 
         private async void ButtonSaveOrderEdit_Click(object sender, RoutedEventArgs e)
