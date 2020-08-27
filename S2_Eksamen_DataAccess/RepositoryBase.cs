@@ -14,8 +14,12 @@ namespace S2_Eksamen_DataAccess
 
         public RepositoryBase(NorthwindContext context)
         {
-            Context = context;
+            NorthwindContext = context;
         }
+
+        public RepositoryBase() { }
+
+        public virtual NorthwindContext NorthwindContext { get => context; set => context = value; }
 
         public virtual NorthwindContext Context
         {
@@ -52,7 +56,7 @@ namespace S2_Eksamen_DataAccess
             return context.Set<T>().Find(id);
         }
 
-        public void Update(T t)
+        public virtual void Update(T t)
         {
             context.SaveChanges();
         }
@@ -60,19 +64,6 @@ namespace S2_Eksamen_DataAccess
         IEnumerable<T> IRepositoryBase<T>.GetAll()
         {
             throw new NotImplementedException();
-        }
-    }
-
-    public class OrderRepository: RepositoryBase<Order>
-    {
-        public OrderRepository(NorthwindContext context) : base(context)
-        {
-
-        }
-        public override IEnumerable<Order> GetAll()
-        {
-            IEnumerable<Order> orders = context.Orders.Include("OrderDetails");
-            return orders;
         }
     }
 }

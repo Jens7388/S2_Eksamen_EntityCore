@@ -24,12 +24,13 @@ namespace S2_Eksamen_GUI
         
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() => viewModel = new ViewModel());
+            viewModel = new ViewModel();
+            await viewModel.InitializeAsync();
             DataContext = viewModel;
             Header.Header = "All Orders:";
         }
 
-        private async void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
+        private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {/*
             List<OrderDetails> orderDetails = new List<OrderDetails>();
             try
@@ -41,9 +42,8 @@ namespace S2_Eksamen_GUI
                     datePickerOrderDate.SelectedDate.Value.Date, datePickerOrderDate.SelectedDate.Value.Date, shipVia, freight,
                     textBoxShipName.Text, textBoxShipAddress.Text, textBoxShipCity.Text, textBoxShipRegion.Text, textBoxShipPostalCode.Text,
                     textBoxShipCountry.Text, orderDetails);
-
-                Repository repository = new Repository();
-                await repository.InsertOrderAsync(order);
+                OrderRepository repository = new OrderRepository(context);
+                repository.Add(order);
                 viewModel.Orders.Add(order);
             }
             catch(Exception ex)
@@ -71,7 +71,6 @@ namespace S2_Eksamen_GUI
                 textBoxDiscount.Text += $"{orderDetails.Discount}\n";
             }
         }
-
         
         private async void ButtonAddOrderDetails_Click(object sender, RoutedEventArgs e)
         {/*
@@ -131,12 +130,11 @@ namespace S2_Eksamen_GUI
             }
         }
 
-        private async void ButtonSaveOrderEdit_Click(object sender, RoutedEventArgs e)
+        private void ButtonSaveOrderEdit_Click(object sender, RoutedEventArgs e)
         {/*
             try
             {
-                Repository repository = new Repository();
-                await repository.UpdateOrderAsync(viewModel.SelectedOrder);
+                repo.Update(viewModel.SelectedOrder);
             }
             catch(Exception ex)
             {
